@@ -1,0 +1,100 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}Book Appointment - ThinkCE LLC{% endblock %}
+
+{% block meta_description %}Schedule a strategic consultation or service discussion with ThinkCE LLC. Choose your
+preferred date and time.{% endblock %}
+
+{% block content %}
+<section class="page-header page-header-bg">
+    <div class="container text-center">
+        <h1 class="animate-up gradi-text">Book an Appointment</h1>
+        <p class="animate-up">Let's discuss how we can build the future together.</p>
+    </div>
+</section>
+
+<section class="appointment-section">
+    <div class="container">
+        <div class="contact-grid">
+            <!-- Information Column -->
+            <div class="contact-info-col">
+                <div class="contact-info-item glass-card animate-up">
+                    <div class="contact-icon"><i class="fas fa-calendar-check"></i></div>
+                    <div class="contact-details">
+                        <h3>Flexible Scheduling</h3>
+                        <p>Select a time that fits your schedule. Our team is available for global consultations.</p>
+                    </div>
+                </div>
+                <div class="contact-info-item glass-card animate-up">
+                    <div class="contact-icon"><i class="fas fa-lightbulb"></i></div>
+                    <div class="contact-details">
+                        <h3>Strategic Insights</h3>
+                        <p>Discuss your goals with our experts and receive actionable initial recommendations.</p>
+                    </div>
+                </div>
+                <div class="contact-info-item glass-card animate-up">
+                    <div class="contact-icon"><i class="fas fa-shield-alt"></i></div>
+                    <div class="contact-details">
+                        <h3>Confidential & Secure</h3>
+                        <p>Your data and discussions are protected by professional non-disclosure standards.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Form Column -->
+            <div class="contact-form-container glass-card animate-up">
+                <span class="eyebrow">Consultation</span>
+                <h2 class="mb-2">Request Discovery Call</h2>
+                <p class="mb-4">Complete the form below to secure your session.</p>
+
+                {% if messages %}
+                {% for message in messages %}
+                <div class="alert {{ message.tags }}">
+                    {{ message }}
+                </div>
+                {% endfor %}
+                {% endif %}
+
+                <form method="post" class="appointment-form">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="{{ form.name.id_for_label }}">Full Name</label>
+                        {{ form.name }}
+                    </div>
+                    <div class="form-group two-col">
+                        <div>
+                            <label for="{{ form.email.id_for_label }}">Email</label>
+                            {{ form.email }}
+                        </div>
+                        <div>
+                            <label for="{{ form.phone.id_for_label }}">Phone Number</label>
+                            {{ form.phone }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.service.id_for_label }}">Service Interest</label>
+                        {{ form.service }}
+                    </div>
+                    <div class="form-group two-col">
+                        <div>
+                            <label for="{{ form.date.id_for_label }}">Preferred Date</label>
+                            {{ form.date }}
+                        </div>
+                        <div>
+                            <label for="{{ form.time.id_for_label }}">Preferred Time</label>
+                            {{ form.time }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.message.id_for_label }}">Additional Details (Optional)</label>
+                        {{ form.message }}
+                    </div>
+                    <button type="submit" class="btn primary-btn full-width">Confirm Booking Request <i class="fas fa-chevron-right ml-2"></i></button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

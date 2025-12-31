@@ -1,0 +1,126 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}About Us - ThinkCE LLC{% endblock %}
+
+{% block meta_description %}Learn about ThinkCE LLC's journey from a small consultancy to a global holding company.
+Discover our leadership, history, and mission to foster innovation.{% endblock %}
+
+{% block content %}
+<section class="page-header page-header-bg">
+    <div class="container">
+        <h1 class="animate-up gradi-text">About ThinkCE</h1>
+        <p class="animate-up">Innovation. Integrity. Impact.</p>
+    </div>
+</section>
+
+<!-- Our Story Section -->
+<section class="story-section section">
+    <div class="container">
+        <div class="split-layout">
+            <div class="split-text">
+                <span class="eyebrow">Our Story</span>
+                <h2>Architecting the Future of Synergy</h2>
+                <p>ThinkCE LLC was founded with a singular vision: to create a synergistic ecosystem where technology,
+                    media, and education converge to solve tomorrow's challenges. As a holding company, we oversee a
+                    portfolio of brands that are leaders in their respective fields.</p>
+                <p>We believe that the future belongs to those who can connect the dots. By integrating diverse
+                    industries, we unlock new possibilities and drive sustainable growth for our partners and
+                    communities.</p>
+            </div>
+            <div class="split-image animate-up">
+                <div class="glass-card">
+                    <img src="{% static 'main/images/office_interior.png' %}" alt="ThinkCE Office">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Timeline Section -->
+<section class="timeline-section section bg-light">
+    <div class="container">
+        <div class="section-header">
+            <span class="eyebrow">Our Journey</span>
+            <h2>A Decade of Innovation</h2>
+        </div>
+        <div class="timeline">
+            <!-- Item 1 -->
+            <div class="timeline-item left animate-left">
+                <div class="timeline-content glass-card">
+                    <span class="year">2010</span>
+                    <h4>The Foundation</h4>
+                    <p>ThinkCE was founded as a small consultancy firm, laying the groundwork for a future conglomerate.
+                    </p>
+                </div>
+            </div>
+            <!-- Item 2 -->
+            <div class="timeline-item right animate-right">
+                <div class="timeline-content glass-card">
+                    <span class="year">2015</span>
+                    <h4>Softivite Inc.</h4>
+                    <p>Recognizing the need for specialized software solutions, we established our dedicated tech arm.
+                    </p>
+                </div>
+            </div>
+            <!-- Item 3 -->
+            <div class="timeline-item left animate-left">
+                <div class="timeline-content glass-card">
+                    <span class="year">2018</span>
+                    <h4>Creative Expansion</h4>
+                    <p>We expanded into the digital media space, acquiring Fsquaremedia to tell compelling stories.</p>
+                </div>
+            </div>
+            <!-- Item 4 -->
+            <div class="timeline-item right animate-right">
+                <div class="timeline-content glass-card">
+                    <span class="year">2020</span>
+                    <h4>Eduscope Initiative</h4>
+                    <p>In response to global shifts, we launched Eduscope to revolutionize remote learning and
+                        accessibility.</p>
+                </div>
+            </div>
+            <!-- Item 5 -->
+            <div class="timeline-item left animate-left">
+                <div class="timeline-content glass-card">
+                    <span class="year">Present</span>
+                    <h4>Global Connectivity</h4>
+                    <p>Operating across 5 continents, driving innovation at the intersection of our three pillars.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Leadership Section -->
+<section class="leadership-section">
+    <div class="container">
+        <div class="section-header">
+            <h2>Our Leadership</h2>
+        </div>
+        <div class="leadership-grid">
+            {% for member in team_members %}
+            <div class="leader-card glass-card animate-up">
+                {% if member.image %}
+                <img src="{{ member.image.url }}" alt="{{ member.name }}" class="leader-image">
+                {% else %}
+                <div class="leader-avatar-placeholder gradi-bg">{{ member.name|slice:":2" }}</div>
+                {% endif %}
+                <h3>{{ member.name }}</h3>
+                <p class="eyebrow">{{ member.role }}</p>
+                <div class="social-links">
+                    {% if member.linkedin_url %}
+                    <a href="{{ member.linkedin_url }}" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    {% endif %}
+                    {% if member.twitter_url %}
+                    <a href="{{ member.twitter_url }}" target="_blank"><i class="fab fa-twitter"></i></a>
+                    {% endif %}
+                </div>
+            </div>
+            {% empty %}
+            <p>Our leadership team grows with every challenge we solve.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}Our Companies - ThinkCE Portfolio{% endblock %}
+
+{% block meta_description %}Explore ThinkCE's portfolio companies: Softivite Inc. (Software Development), Fsquaremedia
+(Digital Media House), and Eduscope (EdTech Platform).{% endblock %}
+
+{% block content %}
+<section class="page-header page-header-bg">
+    <div class="container text-center">
+        <h1 class="animate-up gradi-text">Our Companies</h1>
+        <p class="animate-up">Diverse sectors. One vision. Discover our brands.</p>
+    </div>
+</section>
+
+<section class="company-section section">
+    <div class="container">
+        {% for c in companies %}
+        <div class="company-row glass-card {% if forloop.counter|divisibleby:2 %}reverse{% endif %} animate-up">
+            <div class="company-image">
+                {% if c.image %}
+                <img src="{{ c.image.url }}" alt="{{ c.name }}">
+                {% else %}
+                <div class="no-image-placeholder gradi-bg">
+                    <span>{{ c.name }}</span>
+                </div>
+                {% endif %}
+            </div>
+            <div class="company-info">
+                <span class="eyebrow">Portfolio Company</span>
+                <h2>{{ c.name }}</h2>
+                <p class="tagline gradi-text">{{ c.tagline }}</p>
+                <p>{{ c.description }}</p>
+                <ul class="features">
+                    {% for feature in c.get_features_list %}
+                    <li><i class="fas fa-check-circle gradi-text"></i> {{ feature }}</li>
+                    {% endfor %}
+                </ul>
+                {% if c.website_url %}
+                <a href="{{ c.website_url }}" class="btn primary-btn" target="_blank">Visit Website <i class="fas fa-external-link-alt"></i></a>
+                {% endif %}
+            </div>
+        </div>
+        {% empty %}
+        <div class="text-center bg-light p-5 rounded-lg glass-card">
+            <p>Our portfolio is constantly evolving. No companies added yet.</p>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

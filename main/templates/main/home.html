@@ -1,0 +1,242 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}ThinkCE LLC - Building the Future Together{% endblock %}
+
+{% block meta_description %}ThinkCE LLC is a diversified holding company specializing in enterprise software
+(Softivite), digital media (Fsquaremedia), and ed-tech (Eduscope). We build ecosystems that drive growth.{% endblock %}
+
+{% block content %}
+<!-- Hero Carousel -->
+<section class="hero-carousel">
+    <div class="carousel-track-container">
+        <ul class="carousel-track">
+            {% for item in carousel_items %}
+            <li class="carousel-slide {% if forloop.first %}current-slide{% endif %}"
+                style="background-image: url('{{ item.image.url }}');">
+                <div class="overlay"></div>
+                <div class="carousel-content hero-glass-card {% if forloop.first %}animate-up{% endif %}">
+                    <h1>{{ item.title|safe }}</h1>
+                    <p>{{ item.subtitle }}</p>
+                    <div class="carousel-actions">
+                        <a href="{{ item.button_url }}" class="btn primary-btn">{{ item.button_text }} <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </li>
+            {% empty %}
+            <!-- Fallback Slide if no items in DB -->
+            <li class="carousel-slide current-slide"
+                style="background-image: url('{% static 'main/images/hero_home.png' %}');">
+                <div class="overlay"></div>
+                <div class="carousel-content hero-glass-card animate-up">
+                    <h1>Building the Future.<br><span class="gradi-text">Together.</span></h1>
+                    <p>ThinkCE LLC is a holding company dedicated to fostering innovation across technology, media, and education.</p>
+                    <div class="carousel-actions">
+                        <a href="{% url 'companies' %}" class="btn primary-btn">Explore Our Companies <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <button class="carousel-btn prev-btn">&#10094;</button>
+    <button class="carousel-btn next-btn">&#10095;</button>
+    <div class="carousel-bar-nav">
+        {% for item in carousel_items %}
+        <div class="bar-indicator {% if forloop.first %}active{% endif %}"><div class="progress"></div></div>
+        {% empty %}
+        <div class="bar-indicator active"><div class="progress"></div></div>
+        {% endfor %}
+    </div>
+</section>
+
+<!-- Stats Strip -->
+<section class="stats-section">
+    <div class="container">
+        <div class="stats-grid">
+            {% for stat in stats %}
+            <div class="stat-item">
+                <span class="stat-number">{{ stat.number }}</span>
+                <span class="stat-label">{{ stat.label }}</span>
+            </div>
+            {% empty %}
+            <div class="stat-item">
+                <span class="stat-number">3</span>
+                <span class="stat-label">Industry Pillars</span>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Creating Synergy / Mission -->
+<section class="mission-section">
+    <div class="container">
+        <div class="mission-content animate-up">
+            <span class="eyebrow">Our Mission</span>
+            <h2>Synergy in Action</h2>
+            <p>At ThinkCE, we don't just invest in companies; we build ecosystems. By bridging the gap between bespoke
+                software, compelling media, and transformative education, we create value that exceeds the sum of its
+                parts.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Values Section -->
+<section class="values-section">
+    <div class="container">
+        <div class="section-header">
+            <h2>Our Core Values</h2>
+        </div>
+        <div class="values-grid">
+            <div class="value-card glass-card animate-up">
+                <div class="value-icon"><i class="fas fa-lightbulb"></i></div>
+                <h3>Innovation</h3>
+                <p>We constantly challenge the status quo, pushing boundaries to discover what's next in tech and
+                    culture.</p>
+            </div>
+            <div class="value-card glass-card animate-up" style="animation-delay: 0.2s;">
+                <div class="value-icon"><i class="fas fa-handshake"></i></div>
+                <h3>Integrity</h3>
+                <p>Trust is our currency. We operate with transparency and unwavering ethical standards in all we do.
+                </p>
+            </div>
+            <div class="value-card glass-card animate-up" style="animation-delay: 0.4s;">
+                <div class="value-icon"><i class="fas fa-rocket"></i></div>
+                <h3>Impact</h3>
+                <p>Measurable results matter. We focus on initializing projects that create real-world positive change.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Stay Informed (Newsletter) -->
+<section class="stay-informed section-pad">
+    <div class="container">
+        <div class="stay-informed-card hero-glass-card animate-up">
+            <div class="stay-informed-content">
+                <span class="eyebrow">Community</span>
+                <h2>Stay <span class="gradi-text">Informed.</span></h2>
+                <p>Join our exclusive community of innovators and visionaries. Get first access to our latest breakthroughs in tech, media, and education.</p>
+                <form action="{% url 'subscribe' %}" method="post" class="stay-informed-form">
+                    {% csrf_token %}
+                    <div class="input-group">
+                        <input type="email" name="email" placeholder="Enter your email" required>
+                        <button type="submit" class="btn primary-btn">Subscribe Now <i class="fas fa-paper-plane"></i></button>
+                    </div>
+                </form>
+            </div>
+            <div class="stay-informed-visual">
+                <!-- Visual element: Logo or abstract shape -->
+                <img src="{% static 'main/images/logo.png' %}" alt="ThinkCE Logo Icon" class="visual-logo">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Why Us Section (Split Layout) -->
+<section class="why-us-section">
+    <div class="container">
+        <div class="split-layout">
+            <div class="split-text">
+                <h2>Why Partner With ThinkCE?</h2>
+                <p>Our unique position as a holding company allows us to leverage cross-sector expertise. Whether you
+                    need enterprise software, brand storytelling, or workforce upskilling, our integrated approach
+                    ensures consistent quality and strategic alignment.</p>
+                <ul class="check-list">
+                    <li>Cross-functional expertise</li>
+                    <li>Scalable infrastructure</li>
+                    <li>Legacy of excellence</li>
+                </ul>
+                <a href="{% url 'contact' %}" class="btn primary-btn">Get in Touch</a>
+            </div>
+            <div class="split-image animate-up">
+                <div class="glass-card">
+                    <img src="{% static 'main/images/corporate_meeting.png' %}" alt="ThinkCE Partnership">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Leadership Section -->
+<section class="leadership-section">
+    <div class="container">
+        <div class="section-header">
+            <h2>Our Leadership</h2>
+        </div>
+        <div class="leadership-grid">
+            {% for member in team_members %}
+            <div class="leader-card glass-card animate-up">
+                {% if member.image %}
+                <img src="{{ member.image.url }}" alt="{{ member.name }}" class="leader-image">
+                {% else %}
+                <div class="leader-avatar-placeholder gradi-bg">{{ member.name|slice:":2" }}</div>
+                {% endif %}
+                <h3>{{ member.name }}</h3>
+                <p class="eyebrow">{{ member.role }}</p>
+                <!-- Optional Bio or Social Links could go here -->
+                <div class="social-links">
+                    {% if member.linkedin_url %}
+                    <a href="{{ member.linkedin_url }}" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    {% endif %}
+                    {% if member.twitter_url %}
+                    <a href="{{ member.twitter_url }}" target="_blank"><i class="fab fa-twitter"></i></a>
+                    {% endif %}
+                </div>
+            </div>
+            {% empty %}
+            <p>Our team is growing!</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="testimonials-section">
+    <div class="container">
+        <div class="section-header">
+            <h2>Client Success Stories</h2>
+        </div>
+
+        <div class="testimonial-carousel">
+            <button class="testimonial-btn prev-btn">&#10094;</button>
+            <div class="testimonial-track-container">
+                <ul class="testimonial-track">
+                    {% for t in testimonials %}
+                    <li class="testimonial-slide {% if forloop.first %}current-slide{% endif %}">
+                        <div class="testimonial-card glass-card">
+                            <div class="quote-icon gradi-text">“</div>
+                            <p class="testimonial-text">{{ t.message }}</p>
+                            <div class="testimonial-author">
+                                <div class="author-avatar gradi-bg">
+                                    {{ t.author_initials }}</div>
+                                <div class="author-info">
+                                    <h4>{{ t.client_name }}</h4>
+                                    <span>{{ t.role }}, {{ t.company_name }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    {% empty %}
+                    <li class="testimonial-slide current-slide">
+                        <div class="testimonial-card">
+                            <p class="testimonial-text">No testimonials available yet.</p>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <button class="testimonial-btn next-btn">&#10095;</button>
+
+            <div class="testimonial-nav">
+                <button class="testimonial-indicator active"></button>
+                <button class="testimonial-indicator"></button>
+                <button class="testimonial-indicator"></button>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

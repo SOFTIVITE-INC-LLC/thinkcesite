@@ -1,0 +1,118 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}Our Services & Core Competencies - ThinkCE LLC{% endblock %}
+
+{% block meta_description %}ThinkCE offers strategic services including Digital Transformation, Operational Oversight,
+EdTech Solutions, Corporate Governance, Sustainability Strategy, and Global Expansion.{% endblock %}
+
+{% block content %}
+<section class="page-header page-header-bg">
+    <div class="container text-center">
+        <h1 class="animate-up gradi-text">Our Expertise</h1>
+        <p class="animate-up">Strategic solutions to bridge the gap between vision and reality.</p>
+    </div>
+</section>
+
+<!-- Core Services -->
+<section class="section">
+    <div class="container">
+        <div class="section-header text-center">
+            <span class="eyebrow">Capabilities</span>
+            <h2>Core Competencies</h2>
+        </div>
+        <div class="services-grid">
+            <div class="service-card glass-card hover-lift">
+                <div class="service-icon gradi-bg">
+                    <i class="fas fa-laptop-code"></i>
+                </div>
+                <h3>Digital Transformation</h3>
+                <p>Through our subsidiary Softivite, we architect comprehensive digital ecosystems that modernize
+                    operations and enhance customer experiences.</p>
+            </div>
+            <div class="service-card glass-card hover-lift">
+                <div class="service-icon gradi-bg">
+                    <i class="fas fa-cogs"></i>
+                </div>
+                <h3>Operational Oversight</h3>
+                <p>We implement rigorous operational frameworks to optimize efficiency, reduce overhead, and ensure our
+                    portfolio companies perform at peak potential.</p>
+            </div>
+            <div class="service-card glass-card hover-lift">
+                <div class="service-icon gradi-bg">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <h3>EdTech Solutions</h3>
+                <p>Bridging the skills gap through Eduscope, delivering cutting-edge e-learning platforms and curriculum
+                    development services.</p>
+            </div>
+            <div class="service-card glass-card hover-lift">
+                <div class="service-icon gradi-bg">
+                    <i class="fas fa-university"></i>
+                </div>
+                <h3>Corporate Governance</h3>
+                <p>We establish robust compliance frameworks and ethical leadership structures to ensure long-term
+                    stability and stakeholder trust.</p>
+            </div>
+            <div class="service-card glass-card hover-lift">
+                <div class="service-icon gradi-bg">
+                    <i class="fas fa-leaf"></i>
+                </div>
+                <h3>Sustainability Strategy</h3>
+                <p>Integrating ESG principles into core business strategies to drive social impact while creating
+                    sustainable economic value.</p>
+            </div>
+            <div class="service-card glass-card hover-lift">
+                <div class="service-icon gradi-bg">
+                    <i class="fas fa-globe"></i>
+                </div>
+                <h3>Global Expansion</h3>
+                <p>Facilitating market entry strategies and cross-border partnerships to scale our portfolio companies
+                    into international markets.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Our Process -->
+<section class="section process-section bg-light">
+    <div class="container">
+        <div class="section-header text-center">
+            <span class="eyebrow">Our Methodology</span>
+            <h2>The ThinkCE Approach</h2>
+        </div>
+        <div class="process-timeline">
+            <div class="process-step glass-card animate-up">
+                <div class="step-number gradi-bg">01</div>
+                <h3>Discovery</h3>
+                <p>We analyze market needs and identify strategic gaps opportunities for innovation.</p>
+            </div>
+            <div class="process-step glass-card animate-up" style="animation-delay: 0.2s;">
+                <div class="step-number gradi-bg">02</div>
+                <h3>Strategy</h3>
+                <p>We formulate data-driven roadmaps to deploy resources effectively and mitigate risk.</p>
+            </div>
+            <div class="process-step glass-card animate-up" style="animation-delay: 0.4s;">
+                <div class="step-number gradi-bg">03</div>
+                <h3>Execution</h3>
+                <p>Our subsidiaries implement solutions with precision, leveraging top-tier talent and tech.</p>
+            </div>
+            <div class="process-step glass-card animate-up" style="animation-delay: 0.6s;">
+                <div class="step-number gradi-bg">04</div>
+                <h3>Growth</h3>
+                <p>We continuously monitor performance and scale successful initiatives globally.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+    <div class="container glass-card animate-up">
+        <span class="eyebrow">Contact Us</span>
+        <h2>Ready to Innovate?</h2>
+        <p>Partner with ThinkCE to unlock new possibilities for your organization.</p>
+        <a href="{% url 'contact' %}" class="btn primary-btn">Get in Touch <i class="fas fa-paper-plane"></i></a>
+    </div>
+</section>
+{% endblock %}
