@@ -18,7 +18,7 @@ set -e # Exit on error
 echo "🚀 Starting Integrated Deployment & Security Sync..."
 
 # --- Configuration ---
-PROJECT_DIR="/var/www/thinkce"
+PROJECT_DIR="/home/softivite/thinkce"
 CLOUDFLARE_CONF="/etc/nginx/cloudflare_ips.conf"
 VENV_PATH="$PROJECT_DIR/venv"
 
@@ -46,13 +46,15 @@ python manage.py collectstatic --noinput
 
 # 5. Permissions Management
 echo "🔐 [5/8] Setting production permissions..."
-sudo chown -R www-data:www-data "$PROJECT_DIR/media"
-sudo chown -R www-data:www-data "$PROJECT_DIR/static"
-sudo chown www-data:www-data "$PROJECT_DIR/db.sqlite3"
-sudo chown www-data:www-data "$PROJECT_DIR"
+sudo chown -R softivite:www-data "$PROJECT_DIR/media"
+sudo chown -R softivite:www-data "$PROJECT_DIR/static"
+sudo chown softivite:www-data "$PROJECT_DIR/db.sqlite3"
+sudo chown softivite:www-data "$PROJECT_DIR"
 
 sudo chmod -R 775 "$PROJECT_DIR/media"
 sudo chmod -R 775 "$PROJECT_DIR/static"
+sudo chmod -R 775 "../"
+
 sudo chmod 664 "$PROJECT_DIR/db.sqlite3"
 sudo chmod 775 "$PROJECT_DIR"
 
@@ -98,7 +100,7 @@ fi
 echo "⚙️ [8/9] Updating Nginx configuration (HTTPS)..."
 cat <<EOF > temp_nginx.conf
 upstream thinkce_app {
-    server unix:/run/thinkce/thinkce.sock;
+    server http://localhost:5050;
 }
 
 server {
@@ -149,23 +151,24 @@ echo "✅ Nginx SSL config updated."
 
 # 9. Gunicorn Systemd Service
 echo "⚙️ [9/10] Configuring Gunicorn systemd service..."
-sudo bash -c "cat <<EOF > /etc/systemd/system/thinkce.service
+cat <<EOF > temp_service.service
 [Unit]
 Description=Gunicorn instance to serve ThinkCE
 After=network.target
 
 [Service]
-User=www-data
+User=softivite
 Group=www-data
 WorkingDirectory=$PROJECT_DIR
 RuntimeDirectory=thinkce
 EnvironmentFile=$PROJECT_DIR/.env
-ExecStart=$VENV_PATH/bin/gunicorn --workers 3 --bind unix:/run/thinkce/thinkce.sock thinkcesite.wsgi:application
+ExecStart=$VENV_PATH/bin/gunicorn --workers 3 --bind 0.0.0.0:5050 thinkcesite.wsgi:application
 
 [Install]
 WantedBy=multi-user.target
-EOF"
+EOF
 
+sudo mv temp_service.service /etc/systemd/system/thinkce.service
 # 10. Service Refresh
 echo "♻️ [10/10] Restarting Application Services..."
 sudo systemctl daemon-reload
