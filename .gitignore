@@ -18,7 +18,6 @@ venv.bak/
 
 # Static and Media
 staticfiles/
-media/
 # If you track static source files, do not ignore 'static/'. Only ignore the collected static root.
 
 # IDEs
