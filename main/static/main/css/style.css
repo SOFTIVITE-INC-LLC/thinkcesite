@@ -1102,6 +1102,32 @@ header:not(.scrolled) .hamburger span {
     gap: 0.75rem;
 }
 
+@media (max-width: 992px) {
+    .company-row {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        text-align: center;
+    }
+
+    .company-row.reverse {
+        direction: ltr;
+        /* Reset direction */
+    }
+
+    .company-image img {
+        height: 300px;
+    }
+
+    .company-info h2 {
+        font-size: 2rem;
+    }
+
+    .company-info .features {
+        display: inline-block;
+        text-align: left;
+    }
+}
+
 /* --- Timeline Overhaul --- */
 .timeline {
     position: relative;
@@ -1447,6 +1473,11 @@ select {
 /* Responsive */
 @media (max-width: 992px) {
     .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .form-group.two-col {
         grid-template-columns: 1fr;
     }
 }
